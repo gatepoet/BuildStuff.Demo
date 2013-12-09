@@ -6,8 +6,8 @@
     <version>1.0.0</version>
     <authors>Kristoffer Rolf Deinoff</authors>
     <owners>Kristoffer Rolf Deinoff</owners>
-    <licenseUrl></licenseUrl>
-    <projectUrl></projectUrl>
+    <licenseUrl>https://github.com/gatepoet/BuildStuff.Demo</licenseUrl>
+    <projectUrl>https://github.com/gatepoet/BuildStuff.Demo</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Continous Deployment in action - BuildStuff 2013 Demo</description>
     <releaseNotes>This release contains the following changes...</releaseNotes>
