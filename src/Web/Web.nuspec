@@ -9,7 +9,7 @@
     <licenseUrl></licenseUrl>
     <projectUrl></projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description></description>
+    <description>Continous Deployment in action - BuildStuff 2013 Demo</description>
     <releaseNotes>This release contains the following changes...</releaseNotes>
   </metadata>
 </package>
