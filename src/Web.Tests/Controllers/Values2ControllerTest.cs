@@ -5,8 +5,8 @@ using Web.Controllers;
 
 namespace Web.Tests.Controllers
 {
-    [TestFixture]
-    public class ValuesControllerTest
+    [TestFixture, Category("Integration")]
+    public class Values2ControllerTest
     {
         [Test]
         public void Get()
