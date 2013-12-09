@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>BuildStuff.Demo</id>
+    <title>BuildStuff 2013 Demo</title>
+    <version>1.0.0</version>
+    <authors>Kristoffer Rolf Deinoff</authors>
+    <owners>Kristoffer Rolf Deinoff</owners>
+    <licenseUrl></licenseUrl>
+    <projectUrl></projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description></description>
+    <releaseNotes>This release contains the following changes...</releaseNotes>
+  </metadata>
+</package>
