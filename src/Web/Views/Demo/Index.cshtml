@@ -1,0 +1,87 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    <script>
+        $(function() {
+            var Product = function(p) {
+                this.id = p.Id;
+                this.name = p.Name;
+                this.price = p.Price;
+                this.releaseDate = p.ReleaseDate;
+                this.amount = ko.observable(1);
+            };
+            var ViewModel = function() {
+                var self = this;
+
+                this.cartId = "@Session["CartId"]";
+                this.cart = ko.observable();
+                this.products = ko.observableArray([]);
+                this.category = ko.observable([]);
+                this.add = function(product) {
+                    $.ajax("/api/ShoppingCart/" + self.cartId, {
+                        data: { productId: product.id, amount: product.amount() },
+                        type: "post",
+                        dataType: "json",
+                        success: function() {
+                            self.updateCart();
+                        }
+                    });
+                };
+                this.updateProducts = function() {
+                    $.getJSON("/api/Products", function(result) {
+                        var products = ko.utils.arrayMap(result, function(p) { return new Product(p); });
+                        vm.products(products);
+                    });
+                };
+
+                this.updateCart = function() {
+                    $.getJSON("/api/ShoppingCart/" + self.cartId, function(result) {
+                        self.cart(ko.mapping.fromJS(result));
+                    });
+                };
+                this.copy = function() {
+                    window.alert(self.cartId);
+                };
+                this.load = function() {
+                    var cartId = window.prompt("Cart ID:");
+                    self.cartId = cartId;
+                    $.post("/Cart/Load/" + self.cartId, {
+                        success: function() {
+                            self.updateCart();
+                        }
+                    });
+                };
+            };
+            var vm = new ViewModel();
+            ko.applyBindings(vm);
+            vm.updateCart();
+            vm.updateProducts();
+        })
+
+    </script>
+}
+
+<h2>Movies</h2>
+<div data-bind="with: cart">
+    <span data-bind="text: ItemCount"></span> items in cart. Total: <span data-bind="text: Total"></span>
+    <br />
+</div>
+<button data-bind="click: copy">Copy</button>
+<button data-bind="click: load">Load</button>
+<table class="table" data-bind="foreach: products">
+    <tr>
+        <td data-bind="text: name"></td>
+        <td data-bind="text: price"></td>
+        <td data-bind="text: releaseDate"></td>
+        <td>
+            <input type="number" data-bind="value: amount" />
+            <button data-bind="click: $root.add">Add</button>
+        </td>
+    </tr>
+</table>

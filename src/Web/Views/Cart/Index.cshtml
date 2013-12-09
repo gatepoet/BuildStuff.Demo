@@ -1,0 +1,47 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Shopping Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script>
+        $(function() {
+            var ViewModel = function () {
+                var self = this;
+                this.cartId = "@Session["CartId"]";
+                this.items = ko.observableArray([]);
+                this.total = ko.observable(0);
+                this.updateCart = function () {
+                    $.getJSON("/api/ShoppingCart/" + self.cartId, function (result) {
+                        self.items(result.Items);
+                        self.total(result.Total);
+                    });
+                };
+            };
+            var vm = new ViewModel();
+            ko.applyBindings(vm);
+            vm.updateCart();
+        });
+    </script>
+}
+<h2>Shopping Cart</h2>
+<table class="table">
+    <tbody>
+        <!-- ko foreach: items -->
+        <tr>
+            <td data-bind="text: Name"></td>
+            <td data-bind="text: Amount"></td>
+            <td data-bind="text: Price"></td>
+            <td data-bind="text: Total"></td>
+        </tr>
+        <!-- /ko -->
+        <tr>
+            <td>Total</td>
+            <td></td>
+            <td></td>
+            <td data-bind="text: total"></td>
+        </tr>
+    </tbody>
+</table>
